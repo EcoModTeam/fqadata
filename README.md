@@ -6,7 +6,11 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of fqadata is to …
+`fqadata` contains 44 regional Floristic Quality Assessment Index
+databases that have been approved or approved with reservations by the
+US Army Corps of Engineers. Paired with the
+[fqacalc](https://github.com/ifoxfoot/fqacalc) package, these data sets
+allow for Floristic Quality Assessment metrics to be calculated.
 
 ## Installation
 
@@ -20,12 +24,12 @@ devtools::install_github("ifoxfoot/fqadata")
 
 ## Example
 
-This is a basic example which shows you how to solve a common problem:
+To access the data:
 
 ``` r
 library(fqadata)
 
-#view dataset
+#view data set
 head(fqai_db)
 #>                   name              name_origin acronym
 #> 1       ABIES CONCOLOR accepted_scientific_name    ABCO

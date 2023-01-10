@@ -1,10 +1,9 @@
 Package: fqadata
-Title: What the Package Does (One Line, Title Case)
+Title: Contains 44 Regional Floristic Quality Assessment Index Databases
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: fqadata contains regional Floristic Quality Assessment Index datasets that have been approved or approved with reservations by the US Army Corps of Engineers.
+    person("Iris", "Foxfoot", , "ifoxfoot@gmail.com", role = c("aut", "cre"))
+Description: fqadata contains 44 regional Floristic Quality Assessment Index databases that have been approved or approved with reservations by the US Army Corps of Engineers.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
