@@ -46,10 +46,24 @@ univ_cleanish <- univ_fqa %>%
                                      T ~ scientific_name)) %>%
   mutate(scientific_name = str_replace_all(scientific_name, "[\\[]", ";")) %>%
   mutate(scientific_name = str_remove(scientific_name, "\\(including.+\\)")) %>%
-  mutate(scientific_name = case_when(scientific_name == "SALVINIA SSP." ~
-                                       "SALVINIA SP.",
-                                     scientific_name == "CARDARIA DRABA, LEPIDIUM DRABA" ~
-                                       "CARDARIA DRABA; LEPIDIUM DRABA",
+  mutate(scientific_name = case_when(scientific_name == "Salvinia ssp." ~
+                                       "Salvinia sp.",
+                                     scientific_name == "Arabis shortii (syn. werier)" ~
+                                       "Arabis shortii; Arabis werier",
+                                     scientific_name == "Cardaria draba, lepidium draba" ~
+                                       "Cardaria draba; lepidium draba",
+                                     scientific_name == "Festuca valesiaca or f. pseudovina;festuca subuliflora" ~
+                                       "Festuca valesiaca; f. pseudovina;festuca subuliflora",
+                                     scientific_name == "Homalosorus pycnocarpon ;athyrium pycnocarpon or diplazium pycnocarpon)" ~
+                                       "Homalosorus pycnocarpon; Athyrium pycnocarpon; Diplazium pycnocarpon",
+                                     scientific_name == "Pinus resinosa (elsewhere in state)" ~
+                                       "Pinus resinosa -not on north fork or south branch mtn",
+                                     scientific_name == "Pinus resinosa (on north fork or south branch mtn)" ~
+                                       "Pinus resinosa -on north fork or south branch mtn",
+                                     scientific_name == "Centaurea nigrescens (c. x moncktonii);centaurea pratensis;centaurea nigrescens" ~
+                                       "Centaurea nigrescens Centaurea x moncktonii; centaurea pratensis; centaurea nigrescens",
+                                     scientific_name == "Juncus balticus;placehold for all varieties of j. balticus = j. arcticus)" ~
+                                       "Juncus balticus; Juncus arcticus",
                                      T ~ scientific_name))
 
 univ_syn_sep <- univ_cleanish %>%
@@ -465,7 +479,10 @@ colorado_clean <- colorado %>%
   #remove genus with no C score
   mutate(remove_me = case_when(is.na(c) & str_detect(scientific_name, " ", negate = TRUE) ~ "remove")) %>%
   filter(is.na(remove_me)) %>%
-  select(-remove_me)
+  select(-remove_me) %>%
+  mutate(synonym = case_when(synonym == "Rosa ×harisonii [foetida × spinosissima]" ~
+                               "foetida × spinosissima",
+                             T ~ synonym))
 
 colorado_pivot <- colorado_clean %>%
   mutate(accepted_scientific_name = scientific_name) %>%
@@ -475,10 +492,6 @@ colorado_pivot <- colorado_clean %>%
   filter(!is.na(scientific_name)) %>%
   mutate(acronym = case_when(name_origin == "synonym" ~ NA_character_,
                              T ~ acronym))
-
-# colorado_dup <- colorado_pivot %>%
-#   group_by(scientific_name, name_origin) %>%
-#   count()
 
 #FLORIDA------------------------------------------------------------------------
 
@@ -639,19 +652,19 @@ ohio_clean <- ohio %>%
                              scientific_name == "Collinsonia verticillata" ~ "COLVET",
                              scientific_name == "Chenopodium glaucum" ~ "CHEGLU", T ~ acronym)) %>%
   mutate(scientific_name = case_when(scientific_name == "Najas marina" &
-                                       native == "native" ~ "Najas marina (native)",
+                                       native == "native" ~ "Najas marina -native",
                                      T ~ scientific_name)) %>%
-  mutate(acronym = case_when(scientific_name == "Najas marina (native)" ~ "NAJMARI",
+  mutate(acronym = case_when(scientific_name == "Najas marina -native" ~ "NAJMARI",
                              T ~ acronym)) %>%
   mutate(scientific_name = case_when(scientific_name == "Phlox subulata" &
-                                       native == "native" ~ "Phlox subulata (native)",
+                                       native == "native" ~ "Phlox subulata -native",
                                      T ~ scientific_name)) %>%
-  mutate(acronym = case_when(scientific_name == "Phlox subulata (native)" ~ "PHLSUBT",
+  mutate(acronym = case_when(scientific_name == "Phlox subulata -native" ~ "PHLSUBT",
                              T ~ acronym)) %>%
   mutate(scientific_name = case_when(scientific_name == "Pinus strobus" &
-                                       native == "native" ~ "Pinus strobus (native)",
+                                       native == "native" ~ "Pinus strobus -native",
                                      T ~ scientific_name)) %>%
-  mutate(acronym = case_when(scientific_name == "Pinus strobus (native)" ~ "PINSTRO",
+  mutate(acronym = case_when(scientific_name == "Pinus strobus -native" ~ "PINSTRO",
                              T ~ acronym))
 
 #WYOMING------------------------------------------------------------------------
@@ -691,11 +704,10 @@ wyoming_pivot <- wyoming_cols %>%
 #NOW CLEANING ALL TOGETHER-----------------------------------------------------
 
 #bind all together
-fqa_db_bind <- rbind(clean_acronyms,
+fqa_db_bind <- rbind(univ_fqa_distinct,
                      southeastern_complete,
-                     #ne_clean,
                      colorado_pivot,
-                     #chic_piv,
+                     chic_piv_acronym,
                      florida_pivot,
                      florida_south_clean,
                      ms_clean,
@@ -709,16 +721,22 @@ fqa_db_bind <- rbind(clean_acronyms,
   #fixing white spaces in scientific name
   mutate(scientific_name = str_squish(scientific_name)) %>%
   mutate(scientific_name = str_trim(scientific_name, side = "both")) %>%
+  #find observations that are at the genus level (only one name)
   mutate(scientific_name = case_when(!str_detect(scientific_name, pattern = " ") ~
                                        paste(scientific_name, "SP."),
                                      T ~ scientific_name)) %>%
-  #delete observations that convert species
+  #delete observations that are not genus not species
   filter(str_detect(scientific_name, " SP\\.", negate = TRUE)) %>%
   rename(name = scientific_name) %>%
   #clean commmon name
   mutate(common_name = str_to_title(common_name)) %>%
   #clean C Value
-  mutate(c = as.numeric(c))
+  mutate(c = as.numeric(c)) %>%
+  #get rid of case where sci name and syn were same, so duplicate rows
+  distinct(family, native, c,
+           w, physiognomy, duration,
+           fqa_db, accepted_scientific_name,
+           name, .keep_all = TRUE)
 
 #cleaning up native column
 fqa_native <- fqa_db_bind %>%
@@ -835,10 +853,20 @@ fqa_name <- fqa_origin %>%
                             "PHYTOLACCA AMERICANA VAR. AMERICANA",
                           name == "TYPHA XGLAUCA" ~
                             "TYPHA X GLAUCA",
-                          T ~ name))
+                          T ~ name)) %>%
+  #fixing odds and ends
+  mutate(name = str_remove_all(name, ", IN PART\\)")) %>%
+  mutate(name = str_remove_all(name, ", MISAPPLIED\\)")) %>%
+  mutate(name = str_remove_all(name, ", MISAPPLIED")) %>%
+  mutate(name = str_remove_all(name, "MISAPPLIED")) %>%
+  mutate(name = str_remove_all(name, "\\(EXCLUDING SSP. BUXIFORME\\)")) %>%
+  mutate(name = str_remove_all(name, "\\[|\\]")) %>%
+  mutate(acronym = str_remove_all(acronym, "\\[|\\]")) %>%
+  filter(name != "INCLUDING 1 SSP.CIES)") %>%
+  filter(name != "NEW TAXON FORMERLY INCL IN C. SESQUIFLORA (ADDED BY ANTIEAU)")
 
 #sort data frame column alphabetically
-fqa_db_cols <- fqa_origin[order(fqa_origin$fqa_db), ]
+fqa_db_cols <- fqa_name[order(fqa_name$fqa_db), ]
 
 #get desired column order
 fqai_db <- fqa_db_cols %>%
@@ -852,11 +880,29 @@ unique_native <- data.frame(unique(fqa_db_bind$native))
 unique_w <- data.frame(unique(fqa_db_bind$w))
 unique_physiog <- data.frame(unique(fqa_db_bind$physiognomy))
 unique_duration <- data.frame(unique(fqa_db_bind$duration))
-unique_name <- data.frame(unique(fqa_db_bind$name))
+unique_name <- data.frame(unique(fqai_db$name))
+
+#duplicated names
+fqa_duplicated_names <- fqai_db %>%
+  group_by(name, accepted_scientific_name, fqa_db) %>%
+  count() %>%
+  filter(n > 1)
+
+#duplicated names
+fqa_duplicated_names2 <- fqai_db %>%
+  group_by(name, name_origin, fqa_db) %>%
+  count() %>%
+  filter(n > 1 & name_origin == "accepted_scientific_name")
+
+#duplicated acronyms
+fqa_duplicated_acronyms <- fqai_db %>%
+  group_by(acronym, name_origin, fqa_db) %>%
+  count() %>%
+  filter(n > 1)
 
 #-------------------------------------------------------------------------------
 #saving dataset MAKE SURE IT IS CLEAN VERSION!!!
 
 #use this dataset  (not viewable to package user)
-usethis::use_data(fqai_db, overwrite = TRUE, compress = "xz")
+#usethis::use_data(fqai_db, overwrite = TRUE, compress = "xz")
 
