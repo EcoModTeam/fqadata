@@ -52,6 +52,10 @@ univ_cleanish <- univ_fqa %>%
                                        "Arabis shortii; Arabis werier",
                                      scientific_name == "Cardaria draba, lepidium draba" ~
                                        "Cardaria draba; lepidium draba",
+                                     scientific_name == "Glyceria striata;glyceria striata, glyceria elata;glyceria striata" ~
+                                       "Glyceria striata; Glyceria elata",
+                                     scientific_name == "Juncus arcticus ssp. littoralis;juncus balticus var. balticus, var. montanus, and var. vallicola." ~
+                                       "Juncus arcticus ssp. littoralis;juncus balticus var. balticus; Juncus balticus var. montanus; Juncus balticus var. vallicola.",
                                      scientific_name == "Festuca valesiaca or f. pseudovina;festuca subuliflora" ~
                                        "Festuca valesiaca; f. pseudovina;festuca subuliflora",
                                      scientific_name == "Homalosorus pycnocarpon ;athyrium pycnocarpon or diplazium pycnocarpon)" ~
@@ -77,8 +81,6 @@ univ_syn_sep <- univ_cleanish %>%
   mutate(synonym = na_if(synonym, ".")) %>%
   #get rid of syn starting with ".;"
   mutate(synonym = str_remove(synonym, "^.;"))
-
-
 
 #split synonym into many columns
 syn_split <- cSplit(univ_syn_sep, 'synonym', ';')
@@ -514,18 +516,27 @@ florida_clean <- florida %>%
   mutate(physiognomy = NA) %>%
   mutate(common_name = NA) %>%
   mutate(fqa_db = "florida_2011") %>%
-  select(scientific_name, synonym, family, acronym, native,
-         c, w, physiognomy, duration, common_name, fqa_db)
+  select(scientific_name, family, acronym, native,
+         c, w, physiognomy, duration, common_name, fqa_db) %>%
+  mutate(scientific_name = case_when(scientific_name == "Euthamia caroliniana (syn. Euthamia minor, E. tenuifolia tenuifolia)" ~
+                                       "Euthamia caroliniana (syn. Euthamia minor, Euthamia tenuifolia tenuifolia)",
+                                     scientific_name == "Ruellia simplex (syn. Ruellia brittoniana, R. tweediana)" ~
+                                       "Ruellia simplex (syn. Ruellia brittoniana, Ruellia tweediana)",
+                                     T ~ scientific_name))
+
+
 
 florida_pivot <- florida_clean %>%
-  separate(scientific_name, into = c("scientific_name", "synonym"), sep = "syn.") %>%
+  mutate(scientific_name = str_replace(scientific_name, "syn.", ",")) %>%
+  separate(scientific_name, into = c("scientific_name", "synonym_1", "synonym_2"), sep = ",") %>%
   mutate(ID = row_number()) %>%
   mutate(scientific_name = case_when(scientific_name == "Eleocharis (submersed viviparous but unable to ID to species)" ~ "Eleocharis sp.",
                                      T ~ scientific_name)) %>%
   mutate(scientific_name = str_remove_all(scientific_name, "[()]")) %>%
-  mutate(synonym = str_remove_all(synonym, "[()]")) %>%
+  mutate(synonym_1 = str_remove_all(synonym_1, "[()]")) %>%
+  mutate(synonym_2 = str_remove_all(synonym_2, "[()]")) %>%
   mutate(accepted_scientific_name = scientific_name) %>%
-  pivot_longer(cols = c("scientific_name", "synonym"),
+  pivot_longer(cols = c("scientific_name", "synonym_1", "synonym_2"),
                names_to = "name_origin",
                values_to = "scientific_name") %>%
   filter(!is.na(scientific_name))
@@ -603,6 +614,8 @@ montana_clean <- montana %>%
          c, w, physiognomy, duration, common_name, fqa_db) %>%
   mutate(synonym = case_when(scientific_name == "Eriogonum brevicaule var. canum"
                              ~ "Eriogonum lagopus; Eriogonum pauciflorum var. canum",
+                             scientific_name == "Transberingia bursifolia ssp. virgata" ~
+                               "Halimolobos virgata; Transberingia virgata",
                              T ~ synonym)) %>%
   distinct()
 
