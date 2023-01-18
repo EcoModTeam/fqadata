@@ -777,11 +777,11 @@ fqa_native <- fqa_db_bind %>%
 fqa_wet <- fqa_native %>%
   mutate(w = str_remove_all(w, "[()]")) %>%
   mutate(w = case_when(w %in% c("NA", "ND", "NI") ~ NA_character_,
-                       w %in% c("UPL") ~ "5",
-                       w %in% c("FACU", "FACU-", "FACU+") ~ "3",
+                       w %in% c("UPL") ~ "2",
+                       w %in% c("FACU", "FACU-", "FACU+") ~ "1",
                        w %in% c("FAC", "FAC-", "FAC+") ~ "0",
-                       w %in% c("FACW", "FACW-", "FACW+") ~ "-3",
-                       w %in% c("OBL") ~ "-5",
+                       w %in% c("FACW", "FACW-", "FACW+") ~ "-1",
+                       w %in% c("OBL") ~ "-2",
                        T ~ w)) %>%
   mutate(w = as.numeric(w))
 
@@ -874,6 +874,7 @@ fqa_name <- fqa_origin %>%
   mutate(name = str_remove_all(name, "MISAPPLIED")) %>%
   mutate(name = str_remove_all(name, "\\(EXCLUDING SSP. BUXIFORME\\)")) %>%
   mutate(name = str_remove_all(name, "\\[|\\]")) %>%
+  mutate(name = str_remove_all(name, "\\s*\\{[^\\)]+\\}")) %>%
   mutate(acronym = str_remove_all(acronym, "\\[|\\]")) %>%
   filter(name != "INCLUDING 1 SSP.CIES)") %>%
   filter(name != "NEW TAXON FORMERLY INCL IN C. SESQUIFLORA (ADDED BY ANTIEAU)")
