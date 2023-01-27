@@ -410,6 +410,15 @@ chicago_clean <- chicago %>%
   #fix a typo
   mutate(acronym = case_when(acronym == "Betula X sandbergii" ~ "ARAPYCA",
                              T ~ acronym)) %>%
+  mutate(c = case_when(scientific_name == "Fallopia scandens" & acronym == "FALCRI" ~ 3,
+                       scientific_name == "Sparganium emersum" & acronym == "SPAEME" ~ 10,
+                       scientific_name == "Triosteum illinoense" & acronym == "TRIAURI" ~ 5,
+                       scientific_name == "Triosteum perfoliatum" & acronym == "TRIPER" ~ 4,
+                       T ~ c)) %>%
+  mutate(w = case_when(scientific_name == "Fragaria virginiana" & acronym == "FRAVIRG" ~ 1,
+                       T ~ w)) %>%
+  mutate(scientific_name = case_when(scientific_name == "Erysimum capitatum" & acronym == "ERYARK" ~ "Erysimum capitatum non-native",
+                       T ~ scientific_name)) %>%
   #get ID per each official name
   group_by(scientific_name) %>%
   mutate(ID = cur_group_id()) %>%
@@ -428,7 +437,6 @@ chic_acronyms <- data.frame(acronym = c(chicago_clean$acronym),
   ungroup() %>%
   mutate(new_id = paste0(ID, "-", count)) %>%
   select(acronym, new_id)
-
 
 #pivot names and synonyms into long form
 chic_piv <- chicago_clean %>%
@@ -784,6 +792,7 @@ fqa_wet <- fqa_native %>%
                        w %in% c("OBL") ~ "-2",
                        T ~ w)) %>%
   mutate(w = as.numeric(w))
+
 
 #cleaning physiog column
 fqa_physiog <- fqa_wet %>%
