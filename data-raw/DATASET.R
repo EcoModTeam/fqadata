@@ -914,34 +914,10 @@ fqai_db <- fqa_db_cols %>%
   mutate(c = as.numeric(c)) %>%
   select(-ID)
 
-#get unique values to clean
-unique_native <- data.frame(unique(fqa_db_bind$native))
-unique_w <- data.frame(unique(fqa_db_bind$w))
-unique_physiog <- data.frame(unique(fqa_db_bind$physiognomy))
-unique_duration <- data.frame(unique(fqa_db_bind$duration))
-unique_name <- data.frame(unique(fqai_db$name))
 
-#duplicated names
-fqa_duplicated_names <- fqai_db %>%
-  group_by(name, accepted_scientific_name, fqa_db) %>%
-  count() %>%
-  filter(n > 1)
-
-#duplicated names
-fqa_duplicated_names2 <- fqai_db %>%
-  group_by(name, name_origin, fqa_db) %>%
-  count() %>%
-  filter(n > 1 & name_origin == "accepted_scientific_name")
-
-#duplicated acronyms
-fqa_duplicated_acronyms <- fqai_db %>%
-  group_by(acronym, name_origin, fqa_db) %>%
-  count() %>%
-  filter(n > 1)
-
-#-------------------------------------------------------------------------------
+#SAVING DATA-------------------------------------------------------------------------------
 #saving dataset MAKE SURE IT IS CLEAN VERSION!!!
 
 #use this dataset  (not viewable to package user)
-#usethis::use_data(fqai_db, overwrite = TRUE, compress = "xz")
+usethis::use_data(fqai_db, overwrite = TRUE, compress = "xz")
 
