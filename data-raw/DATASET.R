@@ -46,7 +46,11 @@ univ_cleanish <- univ_fqa %>%
                                      T ~ scientific_name)) %>%
   mutate(scientific_name = str_replace_all(scientific_name, "[\\[]", ";")) %>%
   mutate(scientific_name = str_remove(scientific_name, "\\(including.+\\)")) %>%
-  mutate(scientific_name = case_when(scientific_name == "Salvinia ssp." ~
+  mutate(scientific_name = case_when(scientific_name == "Juncus bufonius ;j. bufonius, in part)" ~
+                                       "Juncus bufonius",
+                                     scientific_name == "Physaria reediana  ;p. reediana, in part)" ~
+                                       "Physaria reediana",
+                                    scientific_name == "Salvinia ssp." ~
                                        "Salvinia sp.",
                                      scientific_name == "Arabis shortii (syn. werier)" ~
                                        "Arabis shortii; Arabis werier",
@@ -240,10 +244,6 @@ univ_fqa_distinct <- clean_acronyms %>%
            scientific_name, .keep_all = TRUE)
 
 
-# dup_acronyms <- univ_fqa_distinct %>%
-#   group_by(acronym, fqa_db) %>%
-#   count() %>%
-#   filter(n > 1)
 
 
 #SOUTH EASTERN DBS---------------------------------------------------------------
@@ -407,16 +407,28 @@ chicago_clean <- chicago %>%
   mutate(fqa_db = "chicago_region_2017") %>%
   select(scientific_name, synonym, family, acronym, native,
          c, w, physiognomy, duration, common_name, fqa_db) %>%
-  #fix a typo
+  #fix acronyms
   mutate(acronym = case_when(acronym == "Betula X sandbergii" ~ "ARAPYCA",
                              T ~ acronym)) %>%
+  mutate(acronym = case_when(scientific_name == "Centaurea X moncktonii" & acronym == "CENMON" ~ "CENMOX",
+                             scientific_name == "Galium parisiense" & acronym == "GALPAR" ~ "GALPAI",
+                             scientific_name == "Helianthus X divariserratus" & acronym == "HELDIV" ~ "HELDIX",
+                             scientific_name == "Planodes virginicum" & acronym == "PLAVIR" ~ "PLAVIG",
+                             scientific_name == "Salix X glatfelteri" & acronym == "SALGLA" ~ "SALGLX",
+                             scientific_name == "Verbena X blanchardii" & acronym == "VERBLA" ~ "VERBLX",
+                             T ~ acronym)) %>%
+  filter(!(scientific_name == "Ranunculus testiculatus" & acronym == "CERTES")) %>%
+  filter(!(scientific_name == "Poinsettia dentata" & acronym == "EUPDEN")) %>%
+  #fix c score
   mutate(c = case_when(scientific_name == "Fallopia scandens" & acronym == "FALCRI" ~ 3,
                        scientific_name == "Sparganium emersum" & acronym == "SPAEME" ~ 10,
                        scientific_name == "Triosteum illinoense" & acronym == "TRIAURI" ~ 5,
                        scientific_name == "Triosteum perfoliatum" & acronym == "TRIPER" ~ 4,
                        T ~ c)) %>%
+  #fix w
   mutate(w = case_when(scientific_name == "Fragaria virginiana" & acronym == "FRAVIRG" ~ 1,
                        T ~ w)) %>%
+  #fix name
   mutate(scientific_name = case_when(scientific_name == "Erysimum capitatum" & acronym == "ERYARK" ~ "Erysimum capitatum non-native",
                        T ~ scientific_name)) %>%
   #get ID per each official name
@@ -569,7 +581,18 @@ florida_south_clean <- florida_south %>%
   mutate(fqa_db = "florida_south_2009") %>%
   select(scientific_name, accepted_scientific_name, name_origin, ID, family, acronym, native,
          c, w, physiognomy, duration, common_name, fqa_db) %>%
-  mutate(scientific_name = str_replace_all(scientific_name, "subsp.", "ssp."))
+  mutate(scientific_name = str_replace_all(scientific_name, "subsp.", "ssp.")) %>%
+  #cleaning up inconsistent C scores
+  filter(!(scientific_name == "Amorpha herbacea var. crenulata" & c == "8")) %>%
+  filter(!(scientific_name == "Halophila decipiens" & c == "8")) %>%
+  filter(!(scientific_name == "Ruppia maritima" & c == "10")) %>%
+  filter(!(scientific_name == "Thalassia testudinum" & c == "9")) %>%
+  filter(!(scientific_name == "Halophila engelmannii" & c == "8")) %>%
+  filter(!(scientific_name == "Alternanthera flavescens" & native == "Exotic")) %>%
+  filter(!(scientific_name == "Heteropogon contortus" & native == "native")) %>%
+  filter(!(scientific_name == "Heteropogon melanocarpus" & native == "native")) %>%
+  filter(!(scientific_name == "Stylosanthes hamata" & native == "Exotic"))
+
 
 #MISSISSISSIPPI------------------------------------------------------------------
 
@@ -637,9 +660,6 @@ montana_pivot <- montana_clean %>%
                values_to = "scientific_name") %>%
   filter(!is.na(scientific_name))
 
-# montana_dups <- montana_pivot %>%
-#   group_by(scientific_name, name_origin) %>%
-#   count()
 
 #OHIO--------------------------------------------------------------------------
 
@@ -717,10 +737,6 @@ wyoming_pivot <- wyoming_cols %>%
                names_to = "name_origin",
                values_to = "scientific_name") %>%
   filter(!is.na(scientific_name))
-
-# wyoming_dups <- wyoming_pivot %>%
-#   group_by(scientific_name, name_origin) %>%
-#   count()
 
 #NOW CLEANING ALL TOGETHER-----------------------------------------------------
 
