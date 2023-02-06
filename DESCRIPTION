@@ -3,7 +3,7 @@ Title: Contains 44 Regional Floristic Quality Assessment Index Databases
 Version: 0.0.0.9000
 Authors@R: 
     person("Iris", "Foxfoot", , "ifoxfoot@gmail.com", role = c("aut", "cre"))
-Description: fqadata contains 44 regional Floristic Quality Assessment Index databases that have been approved or approved with reservations by the US Army Corps of Engineers.
+Description: fqadata contains 44 regional Floristic Quality Assessment Index databases that have been approved or approved with reservations by the US Army Corps of Engineers. Paired with the fqacalc R package, these data sets allow for Floristic Quality Assessment metrics to be calculated.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

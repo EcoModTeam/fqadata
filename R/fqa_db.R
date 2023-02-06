@@ -2,8 +2,8 @@
 #'
 #' A data set containing 44 regional Floristic Quality Assessment databases.
 #' Each of these databases has been approved or approved with reservations for use
-#' by the US Army Corps of Engineers. Paired with the `fqacalc` R package, this
-#' package can assist with the calculation of Florisitic Quality Assessment metrics.
+#' by the US Army Corps of Engineers. Paired with the `fqacalc` R package, these
+#' datasets allow for Floristic Quality Assessment metrics to be calculated.
 #'
 #' @format A data frame with 128554 rows and 12 variables:
 #' \describe{

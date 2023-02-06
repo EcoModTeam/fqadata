@@ -6,10 +6,10 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-`fqadata` contains 44 regional Floristic Quality Assessment Index
-databases that have been approved or approved with reservations by the
-US Army Corps of Engineers. Paired with the
-[fqacalc](https://github.com/ifoxfoot/fqacalc) package, these data sets
+`fqadata` contains 44 regional Floristic Quality Assessment databases
+that have been approved or approved with reservations by the US Army
+Corps of Engineers. Paired with the
+[fqacalc](https://github.com/ifoxfoot/fqacalc) package, these datasets
 allow for Floristic Quality Assessment metrics to be calculated.
 
 ## Installation
@@ -30,7 +30,7 @@ To access the data:
 library(fqadata)
 
 #view data set
-head(fqai_db)
+head(fqa_db)
 #>                   name              name_origin acronym
 #> 1       ABIES CONCOLOR accepted_scientific_name    ABCO
 #> 2 ABUTILON THEOPHRASTI accepted_scientific_name    ABTH
