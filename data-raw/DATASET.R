@@ -908,7 +908,7 @@ fqa_name <- fqa_origin %>%
 fqa_db_cols <- fqa_name[order(fqa_name$fqa_db), ]
 
 #get desired column order
-fqai_db <- fqa_db_cols %>%
+fqa_db <- fqa_db_cols %>%
   select(name, name_origin, acronym, accepted_scientific_name, everything()) %>%
   rename(accepted_scientific_name = accepted_scientific_name) %>%
   mutate(c = as.numeric(c)) %>%
@@ -919,5 +919,5 @@ fqai_db <- fqa_db_cols %>%
 #saving dataset MAKE SURE IT IS CLEAN VERSION!!!
 
 #use this dataset  (not viewable to package user)
-usethis::use_data(fqai_db, overwrite = TRUE, compress = "xz")
+usethis::use_data(fqa_db, overwrite = TRUE, compress = "xz")
 
