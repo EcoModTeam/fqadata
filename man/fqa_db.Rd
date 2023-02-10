@@ -3,7 +3,7 @@
 \docType{data}
 \name{fqa_db}
 \alias{fqa_db}
-\title{Regional Floristic Quality Assessment Index Databases}
+\title{Regional Floristic Quality Assessment Databases}
 \format{
 A data frame with 128554 rows and 12 variables:
 \describe{
@@ -18,9 +18,12 @@ A data frame with 128554 rows and 12 variables:
 \item{physiognomy}{Structure or physical appearance of plant}
 \item{duration}{Lifespan of plant}
 \item{common_name}{Common name(s) for plant}
-\item{fqa_db}{Regional FQAI database}
+\item{fqa_db}{Regional FQA database}
 ...
 }
+}
+\source{
+See \code{fqa_citations}
 }
 \usage{
 fqa_db
@@ -29,6 +32,6 @@ fqa_db
 A data set containing 44 regional Floristic Quality Assessment databases.
 Each of these databases has been approved or approved with reservations for use
 by the US Army Corps of Engineers. Paired with the \code{fqacalc} R package, these
-datasets allow for Floristic Quality Assessment metrics to be calculated.
+data sets allow for Floristic Quality Assessment metrics to be calculated.
 }
 \keyword{datasets}

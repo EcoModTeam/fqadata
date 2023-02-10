@@ -921,3 +921,6 @@ fqa_db <- fqa_db_cols %>%
 #use this dataset  (not viewable to package user)
 usethis::use_data(fqa_db, overwrite = TRUE, compress = "xz")
 
+#optimize and check compression
+# tools::resaveRdaFiles("data/fqa_db.rda")
+# tools::checkRdaFiles("data/fqa_db.rda")

@@ -1,0 +1,15 @@
+#' Citations for Floristic Quality Assessment Databases
+#'
+#' A data set containing citations for the 44 regional Floristic Quality Assessment (FQA)
+#' databases contained in this package, as well as information on approval status,
+#' and notes regarding the regional database.
+#'
+#' @format A data frame with 44 rows and 4 variables:
+#' \describe{
+#'   \item{fqa_db}{Regional FQA database}
+#'   \item{recommendation}{Indicates if the regional FQA database was recommended for use by the US Army Corps of Engineers in 2020}
+#'   \item{notes}{Notes on the limitations or recommended useage of the regional FQA database}
+#'   \item{citation}{A citation for the regional FQA database}
+#'   ...
+#' }
+"fqa_citations"

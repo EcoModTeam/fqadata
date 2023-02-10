@@ -1,9 +1,9 @@
-#' Regional Floristic Quality Assessment Index Databases
+#' Regional Floristic Quality Assessment Databases
 #'
 #' A data set containing 44 regional Floristic Quality Assessment databases.
 #' Each of these databases has been approved or approved with reservations for use
 #' by the US Army Corps of Engineers. Paired with the `fqacalc` R package, these
-#' datasets allow for Floristic Quality Assessment metrics to be calculated.
+#' data sets allow for Floristic Quality Assessment metrics to be calculated.
 #'
 #' @format A data frame with 128554 rows and 12 variables:
 #' \describe{
@@ -18,7 +18,8 @@
 #'   \item{physiognomy}{Structure or physical appearance of plant}
 #'   \item{duration}{Lifespan of plant}
 #'   \item{common_name}{Common name(s) for plant}
-#'   \item{fqa_db}{Regional FQAI database}
+#'   \item{fqa_db}{Regional FQA database}
 #'   ...
 #' }
+#' @source See `fqa_citations`
 "fqa_db"
