@@ -1,8 +1,8 @@
 #' Citations for Floristic Quality Assessment Databases
 #'
-#' A data set containing citations for the 44 regional Floristic Quality Assessment (FQA)
+#' A data set containing citations for the regional Floristic Quality Assessment (FQA)
 #' databases contained in this package, as well as information on approval status,
-#' and notes regarding the regional database.
+#' and notes regarding the proper application of the regional database.
 #'
 #' @format A data frame with 44 rows and 4 variables:
 #' \describe{
