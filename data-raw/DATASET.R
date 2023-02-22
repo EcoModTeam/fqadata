@@ -388,10 +388,10 @@ southeastern_complete <- rbind(southeastern_mountains,
 
 #CHICAGO------------------------------------------------------------------------
 
-chicago <- read_csv(here("data-raw",
+chicago <- read_excel(here("data-raw",
                          "FQA_databases",
                          "not_from_universal_calc",
-                         "chicago_region_2017.csv")) %>%
+                         "chicago_region_2017.xlsx")) %>%
   clean_names()
 
 chicago_clean <- chicago %>%
@@ -401,34 +401,17 @@ chicago_clean <- chicago %>%
   mutate(family = scientific_family_name) %>%
   mutate(native = nativity) %>%
   mutate(c = coefficient_of_conservatism) %>%
-  mutate(w = wetness_coefficient) %>%
+  mutate(w = midwest_region_wetland_indicator) %>%
   mutate(physiognomy = habit) %>%
   mutate(common_name = common_name_nwpl_mohlenbrock_wilhelm_rericha) %>%
   mutate(fqa_db = "chicago_region_2017") %>%
   select(scientific_name, synonym, family, acronym, native,
          c, w, physiognomy, duration, common_name, fqa_db) %>%
-  #fix acronyms
-  mutate(acronym = case_when(acronym == "Betula X sandbergii" ~ "ARAPYCA",
-                             T ~ acronym)) %>%
-  mutate(acronym = case_when(scientific_name == "Centaurea X moncktonii" & acronym == "CENMON" ~ "CENMOX",
-                             scientific_name == "Galium parisiense" & acronym == "GALPAR" ~ "GALPAI",
-                             scientific_name == "Helianthus X divariserratus" & acronym == "HELDIV" ~ "HELDIX",
-                             scientific_name == "Planodes virginicum" & acronym == "PLAVIR" ~ "PLAVIG",
-                             scientific_name == "Salix X glatfelteri" & acronym == "SALGLA" ~ "SALGLX",
-                             scientific_name == "Verbena X blanchardii" & acronym == "VERBLA" ~ "VERBLX",
-                             T ~ acronym)) %>%
-  filter(!(scientific_name == "Ranunculus testiculatus" & acronym == "CERTES")) %>%
   filter(!(scientific_name == "Poinsettia dentata" & acronym == "EUPDEN")) %>%
-  #fix c score
-  mutate(c = case_when(scientific_name == "Fallopia scandens" & acronym == "FALCRI" ~ 3,
-                       scientific_name == "Sparganium emersum" & acronym == "SPAEME" ~ 10,
-                       scientific_name == "Triosteum illinoense" & acronym == "TRIAURI" ~ 5,
-                       scientific_name == "Triosteum perfoliatum" & acronym == "TRIPER" ~ 4,
-                       T ~ c)) %>%
-  #fix w
-  mutate(w = case_when(scientific_name == "Fragaria virginiana" & acronym == "FRAVIRG" ~ 1,
+  # #fix w
+  mutate(w = case_when(scientific_name == "Fragaria virginiana" & acronym == "FRAVIRG" ~ "FACU",
                        T ~ w)) %>%
-  #fix name
+  # #fix name
   mutate(scientific_name = case_when(scientific_name == "Erysimum capitatum" & acronym == "ERYARK" ~ "Erysimum capitatum non-native",
                        T ~ scientific_name)) %>%
   #get ID per each official name
@@ -439,6 +422,7 @@ chicago_clean <- chicago %>%
   cSplit(., 'synonym', ';') %>%
   mutate(synonym_1 = case_when(tolower(synonym_1) == tolower(scientific_name) ~ NA_character_,
                                T ~ synonym_1))
+
 
 #get complete list of acronyms and IDs
 chic_acronyms <- data.frame(acronym = c(chicago_clean$acronym),
@@ -470,7 +454,7 @@ chic_piv_acronym <- left_join(chic_piv, chic_acronyms, by = "new_id") %>%
   select(-new_id, - count)
 
 chic_dup <- chic_piv_acronym %>%
-  group_by(scientific_name, accepted_scientific_name) %>%
+  group_by(acronym) %>%
   count()
 
 #COLORADO-----------------------------------------------------------------------
@@ -793,13 +777,17 @@ fqa_native <- fqa_db_bind %>%
                                           "Exotic",
                                           "Adventive",
                                           "Cryptogenic",
-                                          "Non-native") ~ "non-native",
+                                          "Non-native") ~ "introduced",
                             T ~ "undetermined")) %>%
   rename(nativity = native)
 
 #cleaning up wet coef column
 fqa_wet <- fqa_native %>%
   mutate(w = str_remove_all(w, "[()]")) %>%
+  mutate(wetland_indicator = case_when(w %in% c("UPL", "FACU", "FACU-", "FACU+",
+                                                 "FAC", "FAC-", "FAC+", "FACW",
+                                                 "FACW-", "FACW+", "OBL") ~ w,
+                                       T ~ NA_character_)) %>%
   mutate(w = case_when(w %in% c("NA", "ND", "NI") ~ NA_character_,
                        w %in% c("UPL") ~ "2",
                        w %in% c("FACU", "FACU-", "FACU+") ~ "1",
