@@ -897,10 +897,9 @@ fqa_db_cols <- fqa_name[order(fqa_name$fqa_db), ]
 
 #get desired column order
 fqa_db <- fqa_db_cols %>%
-  select(name, name_origin, acronym, accepted_scientific_name, everything()) %>%
-  rename(accepted_scientific_name = accepted_scientific_name) %>%
-  mutate(c = as.numeric(c)) %>%
-  select(-ID)
+  select(name, name_origin, acronym, accepted_scientific_name, family, nativity, c,
+         w, wetland_indicator, physiognomy, duration, common_name, fqa_db) %>%
+  mutate(c = as.numeric(c))
 
 
 #SAVING DATA-------------------------------------------------------------------------------
