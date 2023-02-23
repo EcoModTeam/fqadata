@@ -5,7 +5,7 @@
 #' by the U.S. Army Corps of Engineers. Paired with the `fqacalc` R package, these
 #' data sets allow for Floristic Quality Assessment metrics to be calculated.
 #'
-#' @format A data frame with 128554 rows and 12 variables:
+#' @format A data frame with 129059 rows and 13 variables:
 #' \describe{
 #'   \item{name}{Latin name for species, either accepted name or synonym}
 #'   \item{name_origin}{Indicates if the name is the accepted scientific name or a synonym}
@@ -15,6 +15,7 @@
 #'   \item{nativity}{Nativity status. Native, introduced, and undetermined are possible values}
 #'   \item{c}{Coefficient of Conservatism (C Value)}
 #'   \item{w}{Wetness Coefficient}
+#'   \item{wetland_indicator}{Wetland indicator status}
 #'   \item{physiognomy}{Structure or physical appearance of species}
 #'   \item{duration}{Lifespan of species}
 #'   \item{common_name}{Common name(s) for species}
