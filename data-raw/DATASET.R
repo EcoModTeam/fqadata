@@ -407,7 +407,6 @@ chicago_clean <- chicago %>%
   mutate(fqa_db = "chicago_region_2017") %>%
   select(scientific_name, synonym, family, acronym, native,
          c, w, physiognomy, duration, common_name, fqa_db) %>%
-  filter(!(scientific_name == "Poinsettia dentata" & acronym == "EUPDEN")) %>%
   # #fix w
   mutate(w = case_when(scientific_name == "Fragaria virginiana" & acronym == "FRAVIRG" ~ "FACU",
                        T ~ w)) %>%
@@ -451,10 +450,28 @@ chic_piv <- chicago_clean %>%
 
 #join acronyms to df
 chic_piv_acronym <- left_join(chic_piv, chic_acronyms, by = "new_id") %>%
-  select(-new_id, - count)
+  select(-new_id, - count) %>%
+  #fixing acronyms
+  mutate(acronym = case_when(accepted_scientific_name == "Viola sororia" & scientific_name == "Viola sororia"  ~ "VIOSOR",
+                             accepted_scientific_name == "Viola sororia" & scientific_name == "Viola priceana" ~ "VIOPRC",
+                             accepted_scientific_name == "Verbena X perriana" & scientific_name == "Verbena X perriana" ~ "VERPEI",
+                             accepted_scientific_name == "Schoenoplectus maritimus" & scientific_name == "Schoenoplectus maritimus" ~ "SCHMAR",
+                             accepted_scientific_name == "Schoenoplectus maritimus" & scientific_name == "SCIRPUS PALUDOSUS" ~ "SCIPAU",
+                             accepted_scientific_name == "Schoenoplectus maritimus" & scientific_name == "Bolboschoenus maritimus" ~ "BOLMAR",
+                             accepted_scientific_name == "Proserpinaca palustris var. crebra" & scientific_name == "Proserpinaca palustris var. crebra" ~ "PROPACR",
+                             accepted_scientific_name == "Mentha arvensis" & scientific_name == "Mentha arvensis subsp. parietariaefolia" ~ "MENARPA",
+                             accepted_scientific_name == "Mentha arvensis" & scientific_name == "Mentha canadensis" ~ "MENCAA",
+                             accepted_scientific_name == "Poinsettia dentata" & scientific_name == "Poinsettia dentata" ~ "POIDEN",
+                             scientific_name == "EUPHORBIA DENTATA" ~ "EUPDEN",
+                             accepted_scientific_name == "Corispermum welshii" & scientific_name == "Corispermum welshii" ~ "CORWEL",
+                             accepted_scientific_name == "Corispermum welshii" & scientific_name == "Corispermum hyssopifolium" ~ "CORHYS",
+                             accepted_scientific_name == "Corispermum welshii" & scientific_name == "Corispermum nitidum" ~ "CORNIT",
+                             accepted_scientific_name == "Corispermum welshii" & scientific_name == "Corispermum pallasii" ~ "CORPAA",
+                             T ~ acronym
+  ))
 
 chic_dup <- chic_piv_acronym %>%
-  group_by(acronym) %>%
+  group_by(scientific_name) %>%
   count()
 
 #COLORADO-----------------------------------------------------------------------
