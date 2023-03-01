@@ -413,6 +413,11 @@ chicago_clean <- chicago %>%
   # #fix name
   mutate(scientific_name = case_when(scientific_name == "Erysimum capitatum" & acronym == "ERYARK" ~ "Erysimum capitatum non-native",
                        T ~ scientific_name)) %>%
+  mutate(common_name = case_when(scientific_name == "Hypericum fraseri" ~ "Fraser's St. John's-Wort",
+                                 T ~ common_name)) %>%
+  mutate(synonym = case_when(scientific_name == "Persicaria lapathifolia" ~ "Polygonum lapathifolium; POLYGONUM SCABRUM; PERSICARIA SCABRA",
+                             scientific_name == "Cyperus schweinitzii" ~ "Cyperus schweinitzii; Cyperus X mesochorus",
+                             T ~ synonym)) %>%
   #get ID per each official name
   group_by(scientific_name) %>%
   mutate(ID = cur_group_id()) %>%
@@ -467,11 +472,10 @@ chic_piv_acronym <- left_join(chic_piv, chic_acronyms, by = "new_id") %>%
                              accepted_scientific_name == "Corispermum welshii" & scientific_name == "Corispermum hyssopifolium" ~ "CORHYS",
                              accepted_scientific_name == "Corispermum welshii" & scientific_name == "Corispermum nitidum" ~ "CORNIT",
                              accepted_scientific_name == "Corispermum welshii" & scientific_name == "Corispermum pallasii" ~ "CORPAA",
-                             T ~ acronym
-  ))
+                             T ~ acronym))
 
 chic_dup <- chic_piv_acronym %>%
-  group_by(scientific_name) %>%
+  group_by(scientific_name, accepted_scientific_name) %>%
   count()
 
 #COLORADO-----------------------------------------------------------------------
