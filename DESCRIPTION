@@ -4,9 +4,10 @@ Version: 0.0.0.9000
 Authors@R: 
     person("Iris", "Foxfoot", , "ifoxfoot@gmail.com", role = c("aut", "cre"))
 Description: Contains regional Floristic Quality Assessment databases that have 
-  been approved or approved with reservations by the U.S. Army Corps of Engineers. 
+  been approved or approved with reservations by the U.S. Army Corps of Engineers (USACE). 
   Paired with the 'fqacalc' R package, these data sets allow for Floristic Quality 
-  Assessment metrics to be calculated.
+  Assessment metrics to be calculated. Both packages were developed for the USACE by
+  the U.S. Army Engineer Research and Development Center's Environmental Laboratory.
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

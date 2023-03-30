@@ -18,7 +18,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-`fqadata` contains 44 regional Floristic Quality Assessment  databases that have been approved or approved with reservations by the US Army Corps of Engineers. Paired with the [fqacalc](https://github.com/ifoxfoot/fqacalc) package, these datasets allow for Floristic Quality Assessment metrics to be calculated.
+`fqadata` contains regional Floristic Quality Assessment  databases that have been approved or approved with reservations by the U.S. Army Corps of Engineers. Paired with the [fqacalc](https://github.com/ifoxfoot/fqacalc) package, these datasets allow for Floristic Quality Assessment metrics to be calculated. Both packages were developed for the USACE by the U.S. Army Engineer Research and Development Center's Environmental Laboratory.
 
 ## Installation
 
