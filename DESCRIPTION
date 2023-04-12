@@ -21,5 +21,6 @@ LazyData: true
 URL: https://github.com/ifoxfoot/fqadata
 BugReports: https://github.com/ifoxfoot/fqadata/issues
 Suggests: 
+    dplyr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
