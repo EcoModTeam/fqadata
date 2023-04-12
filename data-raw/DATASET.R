@@ -910,6 +910,8 @@ fqa_name <- fqa_origin %>%
   mutate(name = str_remove_all(name, "\\[|\\]")) %>%
   mutate(name = str_remove_all(name, "\\s*\\{[^\\)]+\\}")) %>%
   mutate(acronym = str_remove_all(acronym, "\\[|\\]")) %>%
+  mutate(acronym = str_replace_all(acronym, "7-FEB", "FEBR")) %>%
+  mutate(acronym = str_replace_all(acronym, "41429", "JUNE")) %>%
   filter(name != "INCLUDING 1 SSP.CIES)") %>%
   filter(name != "NEW TAXON FORMERLY INCL IN C. SESQUIFLORA (ADDED BY ANTIEAU)")
 
@@ -922,6 +924,19 @@ fqa_db <- fqa_db_cols %>%
          w, wetland_indicator, physiognomy, duration, common_name, fqa_db) %>%
   mutate(c = as.numeric(c))
 
+
+#check for dups
+dup_names <- fqa_db %>%
+  group_by(name, fqa_db, name_origin) %>%
+  summarise(n = n()) %>%
+  filter(name_origin == "accepted_scientific_name")
+
+#check for dups
+dup_acronym <- fqa_db %>%
+  group_by(acronym, fqa_db) %>%
+  filter(!is.na(acronym)) %>%
+  filter(fqa_db != "pennsylvania_piedmont_2013") %>%
+  summarise(n = n())
 
 #SAVING DATA-------------------------------------------------------------------------------
 #saving dataset MAKE SURE IT IS CLEAN VERSION!!!

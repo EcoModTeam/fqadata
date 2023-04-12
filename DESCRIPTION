@@ -2,7 +2,10 @@ Package: fqadata
 Title: Contains Regional Floristic Quality Assessment Databases
 Version: 0.0.0.9000
 Authors@R: 
-    person("Iris", "Foxfoot", , "ifoxfoot@gmail.com", role = c("aut", "cre"))
+        c(
+    person("Iris", "Foxfoot", role = c("aut")),
+    person("Ecological Modeling Team", email = "ecomodteam@usace.army.mil", role = c("cre"))
+      )
 Description: Contains regional Floristic Quality Assessment databases that have 
   been approved or approved with reservations by the U.S. Army Corps of Engineers (USACE). 
   Paired with the 'fqacalc' R package, these data sets allow for Floristic Quality 
@@ -17,3 +20,6 @@ Depends:
 LazyData: true
 URL: https://github.com/ifoxfoot/fqadata
 BugReports: https://github.com/ifoxfoot/fqadata/issues
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
