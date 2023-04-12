@@ -5,7 +5,7 @@
 \alias{fqa_citations}
 \title{Citations for Floristic Quality Assessment Databases}
 \format{
-A data frame with 44 rows and 4 variables:
+A data frame
 \describe{
 \item{fqa_db}{Regional FQA database}
 \item{recommendation}{Indicates if the regional FQA database was recommended for use by the U.S. Army Corps of Engineers in 2020}

@@ -5,7 +5,7 @@
 #' by the U.S. Army Corps of Engineers. Paired with the `fqacalc` R package, these
 #' data sets allow for Floristic Quality Assessment metrics to be calculated.
 #'
-#' @format A data frame with 129059 rows and 13 variables:
+#' @format A data frame
 #' \describe{
 #'   \item{name}{Latin name for species, either accepted name or synonym}
 #'   \item{name_origin}{Indicates if the name is the accepted scientific name or a synonym}

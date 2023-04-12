@@ -4,7 +4,7 @@
 #' databases contained in this package, as well as information on approval status,
 #' and notes regarding the proper application of the regional database.
 #'
-#' @format A data frame with 44 rows and 4 variables:
+#' @format A data frame
 #' \describe{
 #'   \item{fqa_db}{Regional FQA database}
 #'   \item{recommendation}{Indicates if the regional FQA database was recommended for use by the U.S. Army Corps of Engineers in 2020}

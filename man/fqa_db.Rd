@@ -5,7 +5,7 @@
 \alias{fqa_db}
 \title{Regional Floristic Quality Assessment Databases}
 \format{
-A data frame with 129059 rows and 13 variables:
+A data frame
 \describe{
 \item{name}{Latin name for species, either accepted name or synonym}
 \item{name_origin}{Indicates if the name is the accepted scientific name or a synonym}

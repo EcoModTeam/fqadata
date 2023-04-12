@@ -1,26 +1,25 @@
 Package: fqadata
 Title: Contains Regional Floristic Quality Assessment Databases
 Version: 0.0.0.9000
-Authors@R: 
-        c(
-    person("Iris", "Foxfoot", role = c("aut")),
-    person("Ecological Modeling Team", email = "ecomodteam@usace.army.mil", role = c("cre"))
-      )
-Description: Contains regional Floristic Quality Assessment databases that have 
-  been approved or approved with reservations by the U.S. Army Corps of Engineers (USACE). 
-  Paired with the 'fqacalc' R package, these data sets allow for Floristic Quality 
-  Assessment metrics to be calculated. Both packages were developed for the USACE by
-  the U.S. Army Engineer Research and Development Center's Environmental Laboratory.
+Authors@R: c(
+    person("Iris", "Foxfoot", role = "aut"),
+    person("Ecological Modeling Team", , , "ecomodteam@usace.army.mil", role = "cre")
+  )
+Description: Contains regional Floristic Quality Assessment databases that
+    have been approved or approved with reservations by the U.S. Army
+    Corps of Engineers (USACE).  Paired with the 'fqacalc' R package,
+    these data sets allow for Floristic Quality Assessment metrics to be
+    calculated. Both packages were developed for the USACE by the U.S.
+    Army Engineer Research and Development Center's Environmental
+    Laboratory.
 License: MIT + file LICENSE
-Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
 Depends: 
     R (>= 2.10)
-LazyData: true
-URL: https://github.com/ifoxfoot/fqadata
-BugReports: https://github.com/ifoxfoot/fqadata/issues
 Suggests: 
     dplyr,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
