@@ -18,7 +18,12 @@ and Development Center’s Environmental Laboratory.
 
 ## Installation
 
-You can install the development version of fqadata from
+``` r
+# install the package from CRAN
+install.packages("fqadata")
+```
+
+You can also install the development version of fqadata from
 [GitHub](https://github.com/) with:
 
 ``` r
