@@ -1,14 +1,10 @@
 Package: fqadata
 Title: Contains Regional Floristic Quality Assessment Databases
 Version: 0.0.0.9000
-Authors@R:
-    c(
-    person("Iris", "Foxfoot", 
-    email = "iris.r.foxfoot@usace.army.mil", 
-    role = c("aut", "cre")),
-    person("U.S. Army Engineer Research and Development Center", 
-    role = c("cph", "fnd"))
-    )
+Authors@R: c(
+    person("Iris", "Foxfoot", , "iris.r.foxfoot@usace.army.mil", role = c("aut", "cre")),
+    person("U.S. Army Engineer Research and Development Center", role = c("cph", "fnd"))
+  )
 Description: Contains regional Floristic Quality Assessment databases that
     have been approved or approved with reservations by the U.S. Army
     Corps of Engineers (USACE). Paired with the 'fqacalc' R package, these
