@@ -7,7 +7,7 @@ Authors@R:
     email = "iris.r.foxfoot@usace.army.mil", 
     role = c("aut", "cre")),
     person("U.S. Army Engineer Research and Development Center", 
-    role = "cph")
+    role = c("cph", "fnd"))
     )
 Description: Contains regional Floristic Quality Assessment databases that
     have been approved or approved with reservations by the U.S. Army
@@ -16,7 +16,7 @@ Description: Contains regional Floristic Quality Assessment databases that
     calculated. Both packages were developed for the USACE by the U.S.
     Army Engineer Research and Development Center's Environmental
     Laboratory.
-License: MIT + file LICENSE
+License: CC0
 Depends: 
     R (>= 2.10)
 Suggests: 
