@@ -8,11 +8,12 @@ library(stringr)
 
 #load data
 citations <- read.csv(here("data-raw", "Regional_db_notes.csv")) %>%
-  clean_names()
+  clean_names() %>%
+  rename(recommended = recommendation)
 
 #cleaning
 fqa_citations <- citations %>%
-  select(fqa_name_in_app, recommendation, notes, citation) %>%
+  select(fqa_name_in_app, recommended, notes, citation) %>%
   rename(fqa_db = fqa_name_in_app) %>%
   mutate(citation = str_replace_all(citation, "Smith, P., G. Doyle, and J. Lemly. 2020. Revision of Colorado’s Floristic Quality Assessment Indices. Colorado Natural Heritage Program, Colorado State University, Fort Collins, Colorado.",
               "Smith, P., G. Doyle, and J. Lemly. 2020. Revision of Colorado's Floristic Quality Assessment Indices. Colorado Natural Heritage Program, Colorado State University, Fort Collins, Colorado.")) %>%

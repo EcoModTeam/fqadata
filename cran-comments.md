@@ -20,8 +20,7 @@ One, 'fqacalc', currently only available on github (being developed by me)
 
 ## Possibly misspelled words in DESCRIPTION
 
-Floristic (2:26, 8:32, 11:25)
-USACE (10:25, 12:54)
+Floristic 
 
-I have checked that these words are not misspelled.
+I have checked that this is not misspelled.
 

@@ -911,7 +911,12 @@ fqa_name <- fqa_origin %>%
   mutate(name = str_remove_all(name, "\\s*\\{[^\\)]+\\}")) %>%
   mutate(acronym = str_remove_all(acronym, "\\[|\\]")) %>%
   mutate(acronym = str_replace_all(acronym, "7-FEB", "FEBR")) %>%
+  mutate(acronym = str_replace_all(acronym, "_CYCA", "CYCA")) %>%
+  mutate(acronym = str_replace_all(acronym, "_DIDIY", "DIDIY")) %>%
+  mutate(name = str_replace_all(name, "A. PRAEALTUS VAR. NEBR.\\)", "A. PRAEALTUS VAR. NEBR.")) %>%
+  mutate(name = str_replace_all(name, "A. ERICOIDES SSP. PANSUS\\)", "A. ERICOIDES SSP. PANSUS")) %>%
   mutate(acronym = str_replace_all(acronym, "41429", "JUNE")) %>%
+  mutate(acronym = na_if(acronym, "2/7/2016")) %>%
   filter(name != "INCLUDING 1 SSP.CIES)") %>%
   filter(name != "NEW TAXON FORMERLY INCL IN C. SESQUIFLORA (ADDED BY ANTIEAU)")
 

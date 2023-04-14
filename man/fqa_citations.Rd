@@ -8,7 +8,7 @@
 A data frame
 \describe{
 \item{fqa_db}{Regional FQA database}
-\item{recommendation}{Indicates if the regional FQA database was recommended for use by the U.S. Army Corps of Engineers}
+\item{recommended}{Indicates if the regional FQA database was recommended for use by the U.S. Army Corps of Engineers}
 \item{notes}{Notes on the limitations or recommended usage of the regional FQA database}
 \item{citation}{A citation for the regional FQA database}
 ...
