@@ -20,7 +20,7 @@ One, 'fqacalc', currently only available on github (being developed by me)
 
 ## Possibly misspelled words in DESCRIPTION
 
-Floristic 
+FQA, Floristic, Spyreas, USACE 
 
-I have checked that this is not misspelled.
+I have checked that these are not misspelled.
 
