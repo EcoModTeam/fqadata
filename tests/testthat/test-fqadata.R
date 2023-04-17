@@ -1,6 +1,7 @@
 #testing for fqadata package
 
 test_that("fqa_db does not have dup acronyms with diff names in same db", {
+  skip_if_not_installed("dplyr")
   expect_equal(nrow(acronym_name_counts <- fqa_db %>%
                       dplyr::group_by(acronym, fqa_db) %>%
                       dplyr::summarize(num_names = dplyr::n_distinct(name)) %>%
@@ -10,6 +11,7 @@ test_that("fqa_db does not have dup acronyms with diff names in same db", {
 })
 
 test_that("fqa_db does not have dup names that are both accepted in same db", {
+  skip_if_not_installed("dplyr")
   expect_true(all(!duplicated(fqa_db %>%
                                 dplyr::filter(name_origin == "accepted_scientific_name") %>%
                                 dplyr::select("name", "fqa_db"))))
