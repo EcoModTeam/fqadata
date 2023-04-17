@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/ifoxfoot/fqadata/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/ifoxfoot/fqadata/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/ifoxfoot/fqadata/workflows/R-CMD-check/badge.svg)](https://github.com/ifoxfoot/fqadata/workflows/R-CMD-check)
 <!-- badges: end -->
 
 `fqadata` contains regional Floristic Quality Assessment databases that
