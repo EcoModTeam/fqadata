@@ -321,7 +321,7 @@ southern_coastal_plain <- southeastern_cols %>%
   select(ID, accepted_scientific_name, scientific_name, name_origin, family, acronym,
          ave_c_value_southern_coastal_plain, physiognomy,
          duration, common_name, nwpl_cstl_plain, native) %>%
-  mutate(fqa_db = "southeastern_southern_coastal_plain_2014") %>%
+  mutate(fqa_db = "southern_coastal_plain_2013") %>%
   rename(c = ave_c_value_southern_coastal_plain) %>%
   rename(w = nwpl_cstl_plain) %>%
   filter(!c == "NA") %>%
@@ -332,7 +332,7 @@ southeastern_plain <- southeastern_cols %>%
   select(ID, accepted_scientific_name, scientific_name, name_origin, family, acronym,
          ave_c_value_plains, physiognomy,
          duration, common_name, nwpl_cstl_plain, native) %>%
-  mutate(fqa_db = "southeastern_plain_2014") %>%
+  mutate(fqa_db = "coastal_plain_southeast_2013") %>%
   rename(c = ave_c_value_plains) %>%
   rename(w = nwpl_cstl_plain) %>%
   filter(!c == "NA") %>%
@@ -344,7 +344,7 @@ southeastern_piedmont <- southeastern_cols %>%
   select(ID, accepted_scientific_name, scientific_name, name_origin, family, acronym,
          ave_c_value_piedmont, physiognomy,
          duration, common_name, nwpl_e_mtns, native) %>%
-  mutate(fqa_db = "southeastern_piedmont_2014") %>%
+  mutate(fqa_db = "southeastern_piedmont_2013") %>%
   rename(c = ave_c_value_piedmont) %>%
   rename(w = nwpl_e_mtns) %>%
   filter(!c == "NA") %>%
@@ -355,7 +355,7 @@ southeastern_mountains <- southeastern_cols %>%
   select(ID, accepted_scientific_name, scientific_name, name_origin, family, acronym,
          ave_c_value_mountains, physiognomy,
          duration, common_name, nwpl_e_mtns, native) %>%
-  mutate(fqa_db = "southeastern_mountains_2014") %>%
+  mutate(fqa_db = "appalachian_mountains_2013") %>%
   rename(c = ave_c_value_mountains) %>%
   rename(w = nwpl_e_mtns) %>%
   filter(!c == "NA") %>%
@@ -366,7 +366,7 @@ southeastern_plateau <- southeastern_cols %>%
   select(ID, accepted_scientific_name, scientific_name, name_origin, family, acronym,
          ave_c_value_interior_plateau, physiognomy,
          duration, common_name, nwpl_e_mtns, native) %>%
-  mutate(fqa_db = "southeastern_interior_plateau_2014") %>%
+  mutate(fqa_db = "interior_plateau_2013") %>%
   rename(c = ave_c_value_interior_plateau) %>%
   rename(w = nwpl_e_mtns) %>%
   filter(!c == "NA") %>%
