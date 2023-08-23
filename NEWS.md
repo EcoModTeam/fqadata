@@ -1,7 +1,5 @@
 # fqadata 1.1.0
 
-# fqadata 1.0.0.9000
-
 ## Breaking Changes
 
 -   Southeastern regional databases were renamed to more closely match their names in other tools and publications. The changes are as follows:
