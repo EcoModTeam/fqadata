@@ -1,3 +1,5 @@
+# fqadata 1.1.0
+
 # fqadata 1.0.0.9000
 
 ## Breaking Changes

@@ -1,6 +1,6 @@
 Package: fqadata
 Title: Contains Regional Floristic Quality Assessment Databases
-Version: 1.0.0.9000
+Version: 1.1.0
 Authors@R: c(
     person("Iris", "Foxfoot", , "iris.r.foxfoot@usace.army.mil", role = c("aut", "cre")),
     person("U.S. Army Engineer Research and Development Center", role = c("cph", "fnd"))
