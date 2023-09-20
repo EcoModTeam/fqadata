@@ -5,7 +5,7 @@
 
 <!-- badges: start -->
 
-[![R-CMD-check](https://github.com/ifoxfoot/fqadata/workflows/R-CMD-check/badge.svg)](https://github.com/ifoxfoot/fqadata/workflows/R-CMD-check)
+[![R-CMD-check](https://github.com/ifoxfoot/fqadata/actions/workflows/check-standard.yaml/badge.svg)](https://github.com/ifoxfoot/fqadata/actions/workflows/check-standard.yaml)
 [![](https://cranlogs.r-pkg.org/badges/grand-total/fqadata)](https://cran.r-project.org/package=fqadata)
 <!-- badges: end -->
 
