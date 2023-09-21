@@ -38,7 +38,7 @@ devtools::install_github("ifoxfoot/fqadata")
 
 ## Example
 
-To access the data:
+To access the dataa:
 
 ```{r example}
 library(fqadata)

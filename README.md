@@ -34,32 +34,32 @@ devtools::install_github("ifoxfoot/fqadata")
 
 ## Example
 
-To access the data:
+To access the dataa:
 
 ``` r
 library(fqadata)
 
 #view data set
 head(fqa_db)
-#>                   name              name_origin acronym
-#> 1       ABIES CONCOLOR accepted_scientific_name    ABCO
-#> 2 ABUTILON THEOPHRASTI accepted_scientific_name    ABTH
-#> 3   ACALYPHA GRACILENS accepted_scientific_name   ACGR2
-#> 4  ACALYPHA RHOMBOIDEA accepted_scientific_name    ACRH
-#> 5   ACALYPHA VIRGINICA accepted_scientific_name    ACVI
-#> 6         ACER NEGUNDO accepted_scientific_name   ACNE2
+#>                                name              name_origin acronym
+#> 1                    ACORUS CALAMUS accepted_scientific_name   ACCA4
+#> 2                ACALYPHA GRACILENS accepted_scientific_name   ACGR2
+#> 3    ACALYPHA GRACILENS VAR. DELZII                  synonym   ACGRD
+#> 4   ACALYPHA GRACILENS VAR. FRASERI                  synonym   ACGRF
+#> 5 ACALYPHA VIRGINICA VAR. GRACILENS                  synonym   ACVIG
+#> 6                      ACER NEGUNDO accepted_scientific_name   ACNE2
 #>   accepted_scientific_name family   nativity c  w wetland_indicator physiognomy
-#> 1           Abies concolor   <NA> introduced 0 NA              <NA>        <NA>
-#> 2     Abutilon theophrasti   <NA> introduced 0 NA              <NA>        <NA>
-#> 3       Acalypha gracilens   <NA>     native 4 NA              <NA>        <NA>
-#> 4      Acalypha rhomboidea   <NA>     native 1 NA              <NA>        <NA>
-#> 5       Acalypha virginica   <NA>     native 6 NA              <NA>        <NA>
-#> 6             Acer negundo   <NA>     native 2 NA              <NA>        <NA>
-#>   duration common_name                             fqa_db
-#> 1     <NA>        <NA> atlantic_coastal_pine_barrens_2018
-#> 2     <NA>        <NA> atlantic_coastal_pine_barrens_2018
-#> 3     <NA>        <NA> atlantic_coastal_pine_barrens_2018
-#> 4     <NA>        <NA> atlantic_coastal_pine_barrens_2018
-#> 5     <NA>        <NA> atlantic_coastal_pine_barrens_2018
-#> 6     <NA>        <NA> atlantic_coastal_pine_barrens_2018
+#> 1           Acorus calamus   <NA> introduced 0 -2               OBL        forb
+#> 2       Acalypha gracilens   <NA>     native 4  0               FAC        forb
+#> 3       Acalypha gracilens   <NA>     native 4  0               FAC        forb
+#> 4       Acalypha gracilens   <NA>     native 4  0               FAC        forb
+#> 5       Acalypha gracilens   <NA>     native 4  0               FAC        forb
+#> 6             Acer negundo   <NA>     native 4  0               FAC        tree
+#>    duration               common_name                     fqa_db
+#> 1 perennial     Single-Vein Sweetflag appalachian_mountains_2013
+#> 2    annual Slender Threeseed Mercury appalachian_mountains_2013
+#> 3    annual Slender Threeseed Mercury appalachian_mountains_2013
+#> 4    annual Slender Threeseed Mercury appalachian_mountains_2013
+#> 5    annual Slender Threeseed Mercury appalachian_mountains_2013
+#> 6 perennial                  Boxelder appalachian_mountains_2013
 ```
