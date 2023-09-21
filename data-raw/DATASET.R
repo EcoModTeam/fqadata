@@ -920,8 +920,31 @@ fqa_name <- fqa_origin %>%
   filter(name != "INCLUDING 1 SSP.CIES)") %>%
   filter(name != "NEW TAXON FORMERLY INCL IN C. SESQUIFLORA (ADDED BY ANTIEAU)")
 
+#Getting rid of non ascii characters
+replace_utf8 <- function(x){
+  pattern <- c("ﬁ", "ﬂ", "’", "×", "ë", "Ë", "ö", "Ö",
+               "Iso�tacea",
+               "Aquilegia micrantha var. mancosana",
+               "Astragalus humistratus var. humistratus ")
+  replace <- c("fi", "fl", "'", "x", "e", "E", "o", "O",
+               "Isoetaceae",
+               "Aquilegia micrantha var. mancosana",
+               "Astragalus humistratus var. humistratus")
+
+  for (i in seq_along(pattern)) {
+    x <- gsub(pattern[i], replace[i], x, perl=TRUE)
+  }
+
+  x <- gsub("\u00A0", " ", x)
+
+
+  return(x)
+}
+
+fqa_ascii <- as.data.frame(sapply(fqa_name, replace_utf8))
+
 #sort data frame column alphabetically
-fqa_db_cols <- fqa_name[order(fqa_name$fqa_db), ]
+fqa_db_cols <- fqa_ascii[order(fqa_ascii$fqa_db), ]
 
 #get desired column order
 fqa_db <- fqa_db_cols %>%
