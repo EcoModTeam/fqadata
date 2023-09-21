@@ -12,3 +12,4 @@
 ## Misc Changes
 
 -   Added a `NEWS.md` file to track changes to the package.
+-   Fixed some non ASCII characters in the data
