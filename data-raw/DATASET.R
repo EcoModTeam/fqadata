@@ -950,7 +950,8 @@ fqa_db_cols <- fqa_ascii[order(fqa_ascii$fqa_db), ]
 fqa_db <- fqa_db_cols %>%
   select(name, name_origin, acronym, accepted_scientific_name, family, nativity, c,
          w, wetland_indicator, physiognomy, duration, common_name, fqa_db) %>%
-  mutate(c = as.numeric(c))
+  mutate(c = as.numeric(c)) %>%
+  mutate(w = as.numeric(w))
 
 
 #check for dups
