@@ -1,5 +1,9 @@
 # fqadata (development version)
 
+# fqadata 1.1.1
+
+Ownership of `fqadata` was transferred to the EcoModTeam github organization. The maintainer was updated to be the Integrated Ecological Modeling Team and the email to contact maintainers was updated to ecomodteam@usace.army.mil.
+
 # fqadata 1.1.0
 
 ## Breaking Changes
