@@ -70,3 +70,24 @@ head(fqa_db)
 #> 80638 appalachian_mountains_2013
 #> 80639 appalachian_mountains_2013
 ```
+
+You can also access metadata about each database
+
+``` r
+#view metadata
+head(fqa_citations)
+#>                               fqa_db            recommended         notes
+#> 1         appalachian_mountains_2013                    YES Wetlands Only
+#> 2 atlantic_coastal_pine_barrens_2018 Yes, with reservations          <NA>
+#> 3                chicago_region_2017                    YES          <NA>
+#> 4       coastal_plain_southeast_2013                    YES Wetlands Only
+#> 5                      colorado_2020                    YES          <NA>
+#> 6 dakotas_excluding_black_hills_2017   Previously Certified          <NA>
+#>                                                                                                                                                                                                                                                                                 citation
+#> 1                                                           Gianopulos, K. 2014. Coefficient of Conservatism Database Development for Wetland Plants\nOccurring in the Southeast United States. NC Dept. of Envir. Quality, Div. of Water Resources: Wetlands Branch. Report to the EPA.
+#> 2                                    Faber-Langendoen, D., Cameron, D., Gilman, A. V., Metzler, K. J., Ring, R. M., & Sneddon, L. (2019). Development of an Ecoregional Floristic Quality Assessment Method for the Northeastern United States. Northeastern Naturalist, 26(3), 593-608.
+#> 3                                                                                                                              Herman, B., Sliwinski, R. and S. Whitaker. 2017. Chicago Region FQA (Floristic Quality Assessment) Calculator. U.S. Army Corps of Engineers, Chicago, IL.
+#> 4                                                            Gianopulos, K. 2014. Coefficient of Conservatism Database Development for Wetland Plants Occurring in the Southeast United States. NC Dept. of Envir. Quality, Div. of Water Resources: Wetlands Branch. Report to the EPA.
+#> 5                                                                                           Smith, P., G. Doyle, and J. Lemly. 2020. Revision of Colorado's Floristic Quality Assessment\nIndices. Colorado Natural Heritage Program, Colorado State University, Fort Collins, Colorado.
+#> 6 The Northern Great Plains Floristic Quality Assessment Panel. 2001. Coefficients of conservatism for the vascular flora of the Dakotas and adjacent grasslands. U.S. Geological Survey, Biological Resources Division, Information and Technology Report USGS/BRD/ITR-2001-0001, 32 p.
+```
